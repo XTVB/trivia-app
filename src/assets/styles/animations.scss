@@ -1,0 +1,46 @@
+.OpenFilterAnimation {
+  animation: OpenFilterScreen ease-in-out 0.5s 1 forwards;
+}
+
+.CloseFilterAnimation {
+  animation: closeFilter ease-in-out 0.5s 1 forwards;
+  @media (min-width: 650px) {
+    animation: closeFilterScreen ease-in-out 0.5s 1 forwards;
+  }
+}
+
+@keyframes OpenFilterScreen {
+  0% {
+    left: -308px;
+  }
+  90% {
+    left: 5;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes closeFilter {
+  0% {
+    left: 0px;
+  }
+  90% {
+    left: calc(-100% + 48px);
+  }
+  100% {
+    left: calc(-100% + 45px);
+  }
+}
+
+@keyframes closeFilterScreen {
+  0% {
+    left: 0px;
+  }
+  90% {
+    left: -308px;
+  }
+  100% {
+    left: -305px;
+  }
+}
