@@ -1,13 +1,16 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    fontSize: theme.typography.fontSizeLarge,
-    fontWeight: 500,
-    textTransform: 'capitalize',
-  },
-  subTitle: {
-    fontSize: theme.typography.fontSize,
-    fontWeight: 400,
-  },
-}));
+const useStyles = makeStyles()((theme) => {
+  return {
+    title: {
+      fontSize: theme.typography.fontSizeLarge,
+      fontWeight: 500,
+      textTransform: 'capitalize',
+    },
+    subTitle: {
+      fontSize: theme.typography.fontSize,
+      fontWeight: 400,
+    },
+  };
+});
+export default useStyles;

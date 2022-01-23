@@ -1,17 +1,15 @@
 import { push } from 'connected-react-router';
 import React, { FC, Fragment, useEffect, useState } from 'react';
-import Button from 'src/components/Button';
-import Paragraph from 'src/components/Paragraph';
 import QuestionCard from 'src/components/QuestionCard';
 import { useAppDispatch, useTypedSelector } from 'src/redux/store';
-import { beginQuiz, getCurrentQuestions, Question, Result, setCurrentResults, setTitle } from 'src/redux/SystemState';
+import { getCurrentQuestions, Question, Result, saveResultsAndNavigateToPage, setTitle } from 'src/redux/SystemState';
 import { PATH } from 'src/utils/constants';
 import { isDefined } from 'src/utils/utils';
 
-import { useStyles } from './QuizStyles';
+import useStyles from './QuizStyles';
 
 const QuizPage: FC = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const dispatch = useAppDispatch();
 
   const quizQuestions = useTypedSelector(getCurrentQuestions);
@@ -46,8 +44,14 @@ const QuizPage: FC = () => {
     if (questionNumber < maxQuestionNumber) {
       setQuestionNumber(questionNumber + 1);
     } else {
-      dispatch(setCurrentResults(newResults));
-      dispatch(push(PATH.RESULTS));
+      dispatch(
+        saveResultsAndNavigateToPage({
+          difficulty: 'easy',
+          amount: maxQuestionNumber,
+          type: 'boolean',
+          results: newResults,
+        })
+      );
     }
   };
 

@@ -6,12 +6,12 @@ import ResultsRow from 'src/components/ResultsRow';
 import { useAppDispatch, useTypedSelector } from 'src/redux/store';
 import { getCurrentResults, Result, setTitle } from 'src/redux/SystemState';
 import { PATH } from 'src/utils/constants';
-import { isDefined } from 'src/utils/utils';
+import { getScore, isDefined } from 'src/utils/utils';
 
-import { useStyles } from './ResultsStyles';
+import useStyles from './ResultsStyles';
 
 const ResultsPage: FC = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const dispatch = useAppDispatch();
 
   const quizResults = useTypedSelector(getCurrentResults);
@@ -21,19 +21,15 @@ const ResultsPage: FC = () => {
     if (!isDefined(quizResults)) {
       dispatch(push(PATH.HOME));
     } else {
-      const totalQuestions = quizResults.length;
-      const correctAnswers = quizResults.reduce((count, result) => (result.wasCorrect ? count + 1 : count), 0);
-      dispatch(setTitle(`You scored ${correctAnswers}/${totalQuestions}`));
+      dispatch(setTitle(`You scored ${getScore(quizResults)}`));
     }
   }, quizResults);
-
-  console.log(JSON.stringify(quizResults));
 
   return (
     <section className={classes.root}>
       <PaperContainer>
         {(quizResults || ([] as Result[])).map((result) => {
-          return <ResultsRow result={result} />;
+          return <ResultsRow key={result.question} result={result} />;
         })}
       </PaperContainer>
       <Button clickHandler={() => dispatch(push(PATH.HOME))}>Play Again?</Button>

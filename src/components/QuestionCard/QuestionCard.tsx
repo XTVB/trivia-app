@@ -1,33 +1,43 @@
 import React, { FC, Fragment } from 'react';
 import { Result, Question } from 'src/redux/SystemState';
-import { isDefined } from 'src/utils/utils';
+import { isDefined, shuffleArray } from 'src/utils/utils';
 import Button from '../Button';
-import { useStyles } from './QuestionCardStyles';
+import useStyles from './QuestionCardStyles';
 
 type QuestionCardProps = {
   question: Question;
   answerCallback: (result: Result) => void;
 };
 
-const QuestionCard: FC<QuestionCardProps> = ({ question, answerCallback }: QuestionCardProps) => {
-  const classes = useStyles();
+const QuestionCard: FC<QuestionCardProps> = ({
+  question: { category, question, correct_answer, incorrect_answers },
+  answerCallback,
+}: QuestionCardProps) => {
+  const { classes } = useStyles();
 
-  const returnResult = (answer: 'True' | 'False') => {
+  const isMultipleChoice = incorrect_answers.length > 1;
+
+  const answerOptions = isMultipleChoice ? shuffleArray([correct_answer, ...incorrect_answers]) : ['True', 'False'];
+
+  const returnResult = (answer: string) => {
     answerCallback({
-      question: question.question,
-      wasCorrect: answer === question.correct_answer,
+      question: question,
+      wasCorrect: answer === correct_answer,
       givenAnswer: answer,
-      correctAnswer: question.correct_answer,
+      correctAnswer: correct_answer,
     });
   };
   return (
     <Fragment>
       {isDefined(question) && (
         <Fragment>
-          <div dangerouslySetInnerHTML={{ __html: question.question }}></div>
+          <div dangerouslySetInnerHTML={{ __html: question }}></div>
           <div>
-            <Button clickHandler={() => returnResult('True')}>True</Button>
-            <Button clickHandler={() => returnResult('False')}>False</Button>
+            {answerOptions.map((answer) => (
+              <Button key={answer} clickHandler={() => returnResult(answer)}>
+                <div dangerouslySetInnerHTML={{ __html: answer }} />
+              </Button>
+            ))}
           </div>
         </Fragment>
       )}

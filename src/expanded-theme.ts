@@ -1,47 +1,6 @@
-import '@material-ui/core/styles';
-import { CSSProperties } from '@material-ui/core/styles/withStyles';
+import '@mui/material/styles';
 
-type SteelColor = {
-  black: string;
-  main: string;
-  slate: string;
-  silver: string;
-};
-
-declare module '@material-ui/core/styles/createPalette' {
-  interface TypeBackground {
-    default: string;
-    paper: string;
-    lightblue: string;
-  }
-
-  interface Palette {
-    snow: Palette['primary'];
-    smoke: Palette['primary'];
-    yellow: Palette['primary'];
-    red: Palette['primary'];
-    purple: Palette['primary'];
-    blue: Palette['primary'];
-    green: Palette['primary'];
-    steel: SteelColor;
-    disabled: string;
-    background: TypeBackground;
-  }
-  interface PaletteOptions {
-    snow: PaletteOptions['primary'];
-    smoke: PaletteOptions['primary'];
-    yellow: PaletteOptions['primary'];
-    red: PaletteOptions['primary'];
-    purple: PaletteOptions['primary'];
-    blue: PaletteOptions['primary'];
-    green: PaletteOptions['primary'];
-    steel: SteelColor;
-    disabled: string;
-    background?: Partial<TypeBackground>;
-  }
-}
-
-declare module '@material-ui/core/styles/createMuiTheme' {
+declare module '@mui/material/styles/createTheme' {
   interface Theme {
     base: {
       border: string;
@@ -60,15 +19,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   }
 }
 
-declare module '@material-ui/core/styles/createMixins' {
-  interface Mixins {
-    clearfix: () => CSSProperties;
-    hideScroll: () => CSSProperties;
-    flexCentered: () => CSSProperties;
-  }
-}
-
-declare module '@material-ui/core/styles/createTypography' {
+declare module '@mui/material/styles/createTypography' {
   interface Typography {
     fontSizeSmall: number;
     fontSizeLarge: number;

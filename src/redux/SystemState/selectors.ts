@@ -10,3 +10,5 @@ export const getAlertMessage = createSelector(getSystemState, (state) => state.a
 export const getCurrentQuestions = createSelector(getSystemState, (state) => state.currentQuestions);
 
 export const getCurrentResults = createSelector(getSystemState, (state) => state.currentResults);
+
+export const getPastResults = createSelector(getSystemState, (state) => state.pastResults);

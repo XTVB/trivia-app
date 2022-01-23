@@ -5,38 +5,36 @@ import PaperContainer from 'src/components/PaperContainer';
 import { useAppDispatch } from 'src/redux/store';
 import { beginQuiz, setTitle } from 'src/redux/SystemState';
 import { PATH } from 'src/utils/constants';
-import useStyles from './HomeStyles';
+import useStyles from './ConfigPageStyles';
 
-const HomePage: FC = () => {
+const ConfigPage: FC = () => {
   const { classes } = useStyles();
   const dispatch = useAppDispatch();
 
-  const launchDefaultQuiz = () => {
+  const launchQuiz = () => {
     dispatch(
       beginQuiz({
-        amount: 10,
-        type: 'boolean',
-        difficulty: 'hard',
+        amount: 5,
+        type: 'multiple',
+        difficulty: 'easy',
       })
     );
   };
 
   useEffect(() => {
-    dispatch(setTitle('Welcome to the Trivia Challenge'));
+    dispatch(setTitle('Configure Trivia Challenge'));
   }, []);
 
   return (
-    <main className={classes.container}>
-      <PaperContainer className={classes.textContainer}>
+    <section className={classes.root}>
+      <PaperContainer>
         <p>You will be presented with 10 True or False questions.</p>
         <p>Can you score 100%?</p>
       </PaperContainer>
-      <section className={classes.buttonContainer}>
-        <Button endIcon='right' clickHandler={launchDefaultQuiz}>Begin</Button>
-        <Button endIcon='settings' clickHandler={() => dispatch(push(PATH.CONFIGURE))}>Configure</Button>
-      </section>
-    </main>
+      <Button clickHandler={() => dispatch(push(PATH.CONFIGURE))}>Back</Button>
+      <Button clickHandler={launchQuiz}>Begin</Button>
+    </section>
   );
 };
 
-export default HomePage;
+export default ConfigPage;

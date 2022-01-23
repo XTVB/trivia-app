@@ -1,23 +1,27 @@
 import React, { FC, ReactNode } from 'react';
-import BaseButton from '@material-ui/core/Button';
-import { useStyles } from './ButtonStyles';
+import BaseButton from '@mui/material/Button';
+import useStyles from './ButtonStyles';
+import Icon, { IconNames } from 'src/components/Icons';
+import { isDefined } from 'src/utils';
 
 type ButtonProps = {
-  styleName?: string | any;
-  rounded?: boolean;
-  children: ReactNode;
+  startIcon?: IconNames;
+  endIcon?: IconNames;
   clickHandler?: (...arg: any) => void;
-  ref?: React.RefObject<any>;
+  children: ReactNode;
 };
 
-const Button: FC<ButtonProps> = ({ styleName, children, clickHandler, rounded, ref }: ButtonProps) => {
-  const className = styleName ? styleName : 'default';
-  const roundedClass = rounded ? 'rounded' : '';
-  const classes = useStyles();
+const Button: FC<ButtonProps> = ({ startIcon, endIcon, children, clickHandler }: ButtonProps) => {
+  const { classes } = useStyles();
 
   return (
-    <BaseButton ref={ref} className={`${classes.button} ${className} ${roundedClass}`} onClick={clickHandler}>
-      {children}
+    <BaseButton 
+      startIcon={isDefined(startIcon) && <Icon name={startIcon}/>}
+      endIcon={isDefined(endIcon) && <Icon name={endIcon}/>}
+      variant="contained" 
+      className={classes.button}
+      onClick={clickHandler}>
+        {children}
     </BaseButton>
   );
 };

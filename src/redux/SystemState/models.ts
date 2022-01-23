@@ -33,5 +33,14 @@ export interface SystemState {
 export interface BeginQuizPayload {
   amount: number;
   difficulty: 'easy' | 'medium' | 'hard';
+  category?: string;
+  type: 'boolean' | 'multiple';
+}
+
+export interface StoreResultsPayload {
+  results: Result[];
+  amount: number;
+  difficulty: 'easy' | 'medium' | 'hard';
+  category?: string;
   type: 'boolean' | 'multiple';
 }

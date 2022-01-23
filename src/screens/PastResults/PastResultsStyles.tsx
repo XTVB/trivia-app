@@ -5,8 +5,7 @@ const useStyles = makeStyles()((theme) => {
     root: {
       color: theme.palette.text.primary,
       display: 'flex',
-      justifyContent: 'center',
-      alignContent: 'center',
+      alignItems: 'center',
       flexDirection: 'column',
       height: '100%',
     },

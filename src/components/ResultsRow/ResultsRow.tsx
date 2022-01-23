@@ -3,14 +3,14 @@ import { Result, Question } from 'src/redux/SystemState';
 import { isDefined } from 'src/utils/utils';
 import Button from '../Button';
 import Icon from '../Icons';
-import { useStyles } from './ResultsRowStyles';
+import useStyles from './ResultsRowStyles';
 
 type ResultsRowProps = {
   result: Result;
 };
 
 const ResultsRow: FC<ResultsRowProps> = ({ result: { question, wasCorrect, givenAnswer, correctAnswer } }: ResultsRowProps) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <Fragment>
