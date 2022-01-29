@@ -1,4 +1,4 @@
-import { Result } from 'src/redux/SystemState';
+import { Answer } from 'src/redux/SystemState';
 
 export function isDefined<T>(val: T | undefined | null): val is T {
   return val !== undefined && val !== null;
@@ -14,7 +14,7 @@ export function shuffleArray<T>(array: T[]): T[] {
   return array;
 }
 
-export function getScore(results: Result[]): string {
+export function getScore(results: Answer[]): string {
   const totalQuestions = results.length;
   const correctAnswers = results.reduce((count, result) => (result.wasCorrect ? count + 1 : count), 0);
 

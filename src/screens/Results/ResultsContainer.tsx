@@ -4,7 +4,7 @@ import Button from 'src/components/Button';
 import PaperContainer from 'src/components/PaperContainer';
 import ResultsRow from 'src/components/ResultsRow';
 import { useAppDispatch, useTypedSelector } from 'src/redux/store';
-import { getCurrentResults, Result, setTitle } from 'src/redux/SystemState';
+import { getCurrentResults, Answer, setTitle } from 'src/redux/SystemState';
 import { PATH } from 'src/utils/constants';
 import { getScore, isDefined } from 'src/utils/utils';
 
@@ -28,7 +28,7 @@ const ResultsPage: FC = () => {
   return (
     <section className={classes.root}>
       <PaperContainer>
-        {(quizResults || ([] as Result[])).map((result) => {
+        {(quizResults || ([] as Answer[])).map((result) => {
           return <ResultsRow key={result.question} result={result} />;
         })}
       </PaperContainer>

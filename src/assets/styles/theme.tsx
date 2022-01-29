@@ -32,7 +32,7 @@ export const theme = responsiveFontSizes(
       },
       secondary: {
         main: '#fab900',
-        dark: '#e6a817'
+        dark: '#e6a817',
       },
       success: {
         main: '#4caf50',

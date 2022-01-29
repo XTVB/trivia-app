@@ -32,8 +32,12 @@ const HomePage: FC = () => {
         <p>Can you score 100%?</p>
       </PaperContainer>
       <section className={classes.buttonContainer}>
-        <Button endIcon='right' clickHandler={launchDefaultQuiz}>Begin</Button>
-        <Button endIcon='settings' clickHandler={() => dispatch(push(PATH.CONFIGURE))}>Configure</Button>
+        <Button endIcon="right" clickHandler={launchDefaultQuiz}>
+          Begin
+        </Button>
+        <Button endIcon="settings" clickHandler={() => dispatch(push(PATH.CONFIGURE))}>
+          Configure
+        </Button>
       </section>
     </main>
   );

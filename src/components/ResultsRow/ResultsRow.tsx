@@ -1,12 +1,12 @@
 import React, { FC, Fragment } from 'react';
-import { Result, Question } from 'src/redux/SystemState';
+import { Answer, Question } from 'src/redux/SystemState';
 import { isDefined } from 'src/utils/utils';
 import Button from '../Button';
 import Icon from '../Icons';
 import useStyles from './ResultsRowStyles';
 
 type ResultsRowProps = {
-  result: Result;
+  result: Answer;
 };
 
 const ResultsRow: FC<ResultsRowProps> = ({ result: { question, wasCorrect, givenAnswer, correctAnswer } }: ResultsRowProps) => {

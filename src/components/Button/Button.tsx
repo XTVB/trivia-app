@@ -15,13 +15,14 @@ const Button: FC<ButtonProps> = ({ startIcon, endIcon, children, clickHandler }:
   const { classes } = useStyles();
 
   return (
-    <BaseButton 
-      startIcon={isDefined(startIcon) && <Icon name={startIcon}/>}
-      endIcon={isDefined(endIcon) && <Icon name={endIcon}/>}
-      variant="contained" 
+    <BaseButton
+      startIcon={isDefined(startIcon) && <Icon name={startIcon} />}
+      endIcon={isDefined(endIcon) && <Icon name={endIcon} />}
+      variant="contained"
       className={classes.button}
-      onClick={clickHandler}>
-        {children}
+      onClick={clickHandler}
+    >
+      {children}
     </BaseButton>
   );
 };

@@ -2,14 +2,27 @@ import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => {
   return {
-    title: {
-      fontSize: theme.typography.fontSizeLarge,
-      fontWeight: 500,
-      textTransform: 'capitalize',
+    paper: {
+      width: '80%',
     },
-    subTitle: {
-      fontSize: theme.typography.fontSize,
-      fontWeight: 400,
+    question: {
+      wordBreak: 'break-word',
+    },
+    circle: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: theme.typography.fontSizeSmall,
+      width: 40,
+      height: 40,
+      backgroundColor: theme.palette.primary.dark,
+      borderRadius: 20,
+      '&.upper': {
+        transform: 'translateY(100%)',
+      },
+      '&.lower': {
+        transform: 'translateY(-100%)',
+      },
     },
   };
 });

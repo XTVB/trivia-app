@@ -23,9 +23,9 @@ const useStyles = makeStyles()((theme) => {
       display: 'flex',
       justifyContent: 'center',
       '&>*:first-of-type': {
-        marginRight: theme.spacing(4)
-      }
-    }
+        marginRight: theme.spacing(4),
+      },
+    },
   };
 });
 export default useStyles;

@@ -6,41 +6,48 @@ export type Question = {
   question: string;
 };
 
-export type Result = {
+export type Answer = {
   question: string;
   wasCorrect: boolean;
   givenAnswer: string;
   correctAnswer: string;
 };
 
+export type Difficulty = 'easy' | 'medium' | 'hard';
+
+export type Category = {
+  id: number;
+  name: string;
+};
+
+export type QuestionType = 'boolean' | 'multiple';
+
+export type BaseQuizSetup = {
+  amount: number;
+  difficulty: Difficulty;
+  category?: Category;
+  type: QuestionType;
+};
+export type QuizSetup = {
+  questions: Question[];
+} & BaseQuizSetup;
+
 export type PastResult = {
   date: string;
-  difficulty: string;
-  type: string;
   score: string;
-  category: string;
-  results: Result[];
-};
+  results: Answer[];
+} & BaseQuizSetup;
 
 export interface SystemState {
   title: string;
   alertMessage: string;
-  currentQuestions?: Question[];
-  currentResults?: Result[];
+  currentQuizSetup: QuizSetup;
+  currentResults?: Answer[];
   pastResults: PastResult[];
 }
 
-export interface BeginQuizPayload {
-  amount: number;
-  difficulty: 'easy' | 'medium' | 'hard';
-  category?: string;
-  type: 'boolean' | 'multiple';
-}
+export type BeginQuizPayload = BaseQuizSetup;
 
-export interface StoreResultsPayload {
-  results: Result[];
-  amount: number;
-  difficulty: 'easy' | 'medium' | 'hard';
-  category?: string;
-  type: 'boolean' | 'multiple';
-}
+export type StoreResultsPayload = {
+  results: Answer[];
+} & BaseQuizSetup;

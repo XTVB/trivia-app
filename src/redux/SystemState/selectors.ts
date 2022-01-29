@@ -7,7 +7,7 @@ export const getTitle = createSelector(getSystemState, (state) => state.title);
 
 export const getAlertMessage = createSelector(getSystemState, (state) => state.alertMessage);
 
-export const getCurrentQuestions = createSelector(getSystemState, (state) => state.currentQuestions);
+export const getCurrentQuizSetup = createSelector(getSystemState, (state) => state.currentQuizSetup);
 
 export const getCurrentResults = createSelector(getSystemState, (state) => state.currentResults);
 

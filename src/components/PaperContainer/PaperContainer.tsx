@@ -4,14 +4,12 @@ import useStyles from './PaperContainerStyles';
 
 export interface PaperContainerProps {
   className?: string;
-  width?: string;
-  maxWidth?: string;
 }
 
-const PaperContainer: FC<PaperContainerProps> = ({ className, width, maxWidth, children }) => {
+const PaperContainer: FC<PaperContainerProps> = ({ className, children }) => {
   const { classes } = useStyles();
   return (
-    <Paper classes={classes} className={className} style={{ width, maxWidth }} elevation={3}>
+    <Paper classes={classes} className={className} elevation={5}>
       {children}
     </Paper>
   );

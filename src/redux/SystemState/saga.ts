@@ -7,39 +7,50 @@ import {
   initiatePastResults,
   PastResult,
   saveResultsAndNavigateToPage,
-  setCurrentQuestions,
+  setCurrentQuizSetup,
   getPastResults,
   setCurrentResults,
   setPastResults,
   setAlertMessage,
 } from 'src/redux/SystemState';
 import { PATH, getScore, isDefined } from 'src/utils';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 
 /***************************** Subroutines ************************************/
 
 function* tryFetchQuestions({ payload }: ReturnType<typeof beginQuiz>) {
   try {
-    const data = yield* call(triviaApi.getQuestions, payload);
-    yield* put(setCurrentQuestions(data));
+    yield* put(showLoading());
+    const questions = yield* call(triviaApi.getQuestions, payload);
+    yield* put(
+      setCurrentQuizSetup({
+        ...payload,
+        questions,
+      })
+    );
     yield* put(push(PATH.QUIZ));
   } catch (error) {
     console.log(error);
     yield* put(setAlertMessage(`Something went wrong`));
+  } finally {
+    yield* put(hideLoading());
   }
 }
 
 function* trySaveResults({ payload }: ReturnType<typeof saveResultsAndNavigateToPage>) {
   try {
-    const { difficulty, type, category, results } = payload;
+    yield* put(showLoading());
+    const { amount, difficulty, type, category, results } = payload;
     const pastResults = yield* select(getPastResults);
     const newResults: PastResult[] = [
       ...pastResults,
       {
+        amount,
         date: new Date().toISOString(),
         difficulty,
         type,
         score: getScore(results),
-        category: isDefined(category) ? category : 'Any',
+        category,
         results,
       },
     ];
@@ -51,17 +62,22 @@ function* trySaveResults({ payload }: ReturnType<typeof saveResultsAndNavigateTo
   } catch (error) {
     console.log(error);
     yield* put(setAlertMessage(`Something went wrong`));
+  } finally {
+    yield* put(hideLoading());
   }
 }
 
 function* tryInitiatePastResults() {
   try {
+    yield* put(showLoading());
     // TODO integrate them with current results in order of date
     const pastResultString = localStorage.getItem('userResults');
     yield* put(setPastResults(isDefined(pastResultString) ? JSON.parse(pastResultString) : []));
   } catch (error) {
     console.log(error);
     yield* put(setAlertMessage(`Something went wrong`));
+  } finally {
+    yield* put(hideLoading());
   }
 }
 /******************************************************************************/

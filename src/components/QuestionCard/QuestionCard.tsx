@@ -1,46 +1,22 @@
 import React, { FC, Fragment } from 'react';
-import { Result, Question } from 'src/redux/SystemState';
-import { isDefined, shuffleArray } from 'src/utils/utils';
-import Button from '../Button';
+import PaperContainer from 'src/components/PaperContainer';
 import useStyles from './QuestionCardStyles';
 
 type QuestionCardProps = {
-  question: Question;
-  answerCallback: (result: Result) => void;
+  question: string;
+  questionNumber: string;
 };
 
-const QuestionCard: FC<QuestionCardProps> = ({
-  question: { category, question, correct_answer, incorrect_answers },
-  answerCallback,
-}: QuestionCardProps) => {
+const QuestionCard: FC<QuestionCardProps> = ({ question, questionNumber }: QuestionCardProps) => {
   const { classes } = useStyles();
-
-  const isMultipleChoice = incorrect_answers.length > 1;
-
-  const answerOptions = isMultipleChoice ? shuffleArray([correct_answer, ...incorrect_answers]) : ['True', 'False'];
-
-  const returnResult = (answer: string) => {
-    answerCallback({
-      question: question,
-      wasCorrect: answer === correct_answer,
-      givenAnswer: answer,
-      correctAnswer: correct_answer,
-    });
-  };
   return (
     <Fragment>
-      {isDefined(question) && (
-        <Fragment>
-          <div dangerouslySetInnerHTML={{ __html: question }}></div>
-          <div>
-            {answerOptions.map((answer) => (
-              <Button key={answer} clickHandler={() => returnResult(answer)}>
-                <div dangerouslySetInnerHTML={{ __html: answer }} />
-              </Button>
-            ))}
-          </div>
-        </Fragment>
-      )}
+      <div className={`${classes.circle} upper`}>?</div>
+      <PaperContainer className={classes.paper}>
+        {/* <div className={classes.question} dangerouslySetInnerHTML={{ __html: question }}></div> */}
+        <div className={classes.question} dangerouslySetInnerHTML={{ __html: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fringilla condimentum ornare. Curabitur viverra convallis convallis. Maecenas maximus lorem sed laoreet laoreet. Fusce ultricies augue id nulla finibus, eu porta ante finibus. Morbi molestie nunc in tincidunt consectetur. Ut suscipit luctus metus sed suscipit. Phasellus semper ac urna eu pulvinar. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec nibh vestibulum, tempor eros maximus, feugiat tellus. Nam neque felis, viverra ut risus sit amet, dignissim posuere augue. Quisque imperdiet vestibulum ex. Suspendisse congue malesuada justo in suscipit. Nam viverra pretium quam, vel pulvinar sem dignissim eget. In egestas eget tellus quis pretium.` }}></div>
+      </PaperContainer>
+      <div className={`${classes.circle} lower`}>{questionNumber}</div>
     </Fragment>
   );
 };

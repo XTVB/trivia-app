@@ -1,5 +1,5 @@
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
-import { BeginQuizPayload, PastResult, Question, Result, SystemState } from './models';
+import { PastResult, Answer, SystemState, QuizSetup } from './models';
 
 export const setTitle: CaseReducer<SystemState, PayloadAction<string>> = (state, { payload }) => {
   state.title = payload;
@@ -9,11 +9,11 @@ export const setAlertMessage: CaseReducer<SystemState, PayloadAction<string>> = 
   state.alertMessage = payload;
 };
 
-export const setCurrentQuestions: CaseReducer<SystemState, PayloadAction<Question[]>> = (state, { payload }) => {
-  state.currentQuestions = payload;
+export const setCurrentQuizSetup: CaseReducer<SystemState, PayloadAction<QuizSetup>> = (state, { payload }) => {
+  state.currentQuizSetup = payload;
 };
 
-export const setCurrentResults: CaseReducer<SystemState, PayloadAction<Result[]>> = (state, { payload }) => {
+export const setCurrentResults: CaseReducer<SystemState, PayloadAction<Answer[]>> = (state, { payload }) => {
   state.currentResults = payload;
 };
 
