@@ -37,9 +37,9 @@ const QuizPage: FC = () => {
     } else {
       dispatch(
         saveResultsAndNavigateToPage({
-          type, 
-          amount, 
-          difficulty, 
+          type,
+          amount,
+          difficulty,
           category,
           results: newResults,
         })
@@ -47,9 +47,17 @@ const QuizPage: FC = () => {
     }
   };
 
-  const questionContainers = useMemo(()=> {
+  const questionContainers = useMemo(() => {
     return questions.map((question, index) => {
-      return <QuestionContainer key={question.question} question={question} questionType={type} questionNumber={`${index+1}/${amount}`} answerCallback={answerCallback}/>
+      return (
+        <QuestionContainer
+          key={question.question}
+          question={question}
+          questionType={type}
+          questionNumber={`${index + 1}/${amount}`}
+          answerCallback={answerCallback}
+        />
+      );
     });
   }, [questions, questionNumber, amount]);
 
@@ -75,8 +83,12 @@ const QuizPage: FC = () => {
         }}
       >
         <div className={classes.flipCard}>
-          <div key={currentFrontQuestion?.key} className={classes.cardSide}>{currentFrontQuestion}</div>
-          <div key={currentBackQuestion?.key} className={`${classes.cardSide} ${classes.backSide}`}>{currentBackQuestion}</div>
+          <div key={currentFrontQuestion?.key} className={classes.cardSide}>
+            {currentFrontQuestion}
+          </div>
+          <div key={currentBackQuestion?.key} className={`${classes.cardSide} ${classes.backSide}`}>
+            {currentBackQuestion}
+          </div>
         </div>
       </CSSTransition>
     </section>

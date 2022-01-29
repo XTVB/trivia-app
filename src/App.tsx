@@ -3,7 +3,7 @@ import Routes from 'src/navigation';
 import { useAppDispatch, useTypedSelector } from './redux/store';
 import AlertModal from './components/Modal/AlertModal';
 import { getAlertMessage, initiatePastResults } from 'src/redux/SystemState';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './assets/styles/theme';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';

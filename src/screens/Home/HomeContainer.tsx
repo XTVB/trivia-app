@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 import React, { FC, useEffect } from 'react';
 import Button from 'src/components/Button';
+import ButtonContainer from 'src/components/ButtonContainer';
 import PaperContainer from 'src/components/PaperContainer';
 import { useAppDispatch } from 'src/redux/store';
 import { beginQuiz, setTitle } from 'src/redux/SystemState';
@@ -31,14 +32,14 @@ const HomePage: FC = () => {
         <p>You will be presented with 10 True or False questions.</p>
         <p>Can you score 100%?</p>
       </PaperContainer>
-      <section className={classes.buttonContainer}>
+      <ButtonContainer>
         <Button endIcon="right" clickHandler={launchDefaultQuiz}>
           Begin
         </Button>
         <Button endIcon="settings" clickHandler={() => dispatch(push(PATH.CONFIGURE))}>
           Configure
         </Button>
-      </section>
+      </ButtonContainer>
     </main>
   );
 };

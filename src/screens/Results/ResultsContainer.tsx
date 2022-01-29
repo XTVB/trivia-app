@@ -16,9 +16,11 @@ const ResultsPage: FC = () => {
 
   const quizResults = useTypedSelector(getCurrentResults);
 
-  // navigate back to home page if questions don't exist, e.g. because /result was navigated to directly
+  console.log(JSON.stringify(quizResults));
+
+  // navigate back to home page if results are empty, e.g. because /result was navigated to directly
   useEffect(() => {
-    if (!isDefined(quizResults)) {
+    if (quizResults.length < 1) {
       dispatch(push(PATH.HOME));
     } else {
       dispatch(setTitle(`You scored ${getScore(quizResults)}`));

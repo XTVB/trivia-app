@@ -20,3 +20,13 @@ export function getScore(results: Answer[]): string {
 
   return `${correctAnswers}/${totalQuestions}`;
 }
+
+export const paginateArray = <T>(array: T[], size: number): T[][] => {
+  return array.reduce((acc, val, i) => {
+    let idx = Math.floor(i / size)
+    let page = acc[idx] || (acc[idx] = [])
+    page.push(val)
+
+    return acc
+  }, [] as T[][])
+}

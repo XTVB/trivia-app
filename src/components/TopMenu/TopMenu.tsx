@@ -8,9 +8,7 @@ import Icon from 'src/components/Icons';
 import { push } from 'connected-react-router';
 import { PATH } from 'src/utils/constants';
 
-type TopProps = {};
-
-const TopMenu: FC<TopProps> = () => {
+const TopMenu: FC = () => {
   const dispatch = useDispatch();
   const { classes } = useStyles();
 

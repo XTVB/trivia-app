@@ -42,7 +42,7 @@ export interface SystemState {
   title: string;
   alertMessage: string;
   currentQuizSetup: QuizSetup;
-  currentResults?: Answer[];
+  currentResults: Answer[];
   pastResults: PastResult[];
 }
 

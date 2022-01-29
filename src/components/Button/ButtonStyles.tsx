@@ -5,14 +5,6 @@ const useStyles = makeStyles()((theme) => {
     button: {
       textTransform: 'none',
       color: theme.palette.text.primary,
-      // '&.default': {
-      //   border: `${theme.base.borderThick} solid ${theme.palette.primary.main}`,
-      //   color: theme.palette.primary.main,
-      //   '&:hover': {
-      //     backgroundColor: theme.palette.primary.main,
-      //     color: theme.palette.common.white,
-      //   },
-      // },
     },
   };
 });

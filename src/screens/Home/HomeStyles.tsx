@@ -14,18 +14,7 @@ const useStyles = makeStyles()((theme) => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-    },
-    buttonContainer: {
-      margin: theme.spacing(4),
-      [theme.breakpoints.up('sm')]: {
-        margin: theme.spacing(2),
-      },
-      display: 'flex',
-      justifyContent: 'center',
-      '&>*:first-of-type': {
-        marginRight: theme.spacing(4),
-      },
-    },
+    }
   };
 });
 export default useStyles;
