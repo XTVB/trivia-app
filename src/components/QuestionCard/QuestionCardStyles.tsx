@@ -16,6 +16,7 @@ const useStyles = makeStyles()((theme) => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      maxWidth: 500
     },
     question: {
       margin: theme.spacing(circleSize / 2, 0),

@@ -43,8 +43,7 @@ const ResultsPage: FC = () => {
     <section className={classes.resultsContainer}>
       <PaperContainer className={classes.paperContainer}>
         <TransitionGroup component={null}>
-          {/* {staggeredResults.map(result => ( */}
-          {quizResults.map((result) => (
+          {staggeredResults.map((result) => (
             <Collapse timeout={350} key={result.question}>
               <ResultsRow result={result} />
             </Collapse>

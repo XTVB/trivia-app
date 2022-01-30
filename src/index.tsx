@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store, { history } from 'src/redux/store';
-import 'src/assets/styles/index.scss';
+import 'src/assets/styles/fonts.scss';
 import App from './App';
 import { ConnectedRouter } from 'connected-react-router';
 

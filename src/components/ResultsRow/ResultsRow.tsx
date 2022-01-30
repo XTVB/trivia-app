@@ -1,6 +1,7 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC } from 'react';
 import { Answer } from 'src/redux/SystemState';
-import Icon from '../Icons';
+import Icon from 'src/components/Icons';
+import PaperContainer from 'src/components/PaperContainer';
 import useStyles from './ResultsRowStyles';
 
 type ResultsRowProps = {
@@ -11,20 +12,18 @@ const ResultsRow: FC<ResultsRowProps> = ({ result: { question, wasCorrect, given
   const { classes } = useStyles();
 
   return (
-    <Fragment>
-      <div className={`${classes.rootContainer}`}>
-        <div className={`${classes.iconContainer} ${wasCorrect ? classes.correctAnswer : classes.inCorrectAnswer}`}>
-          <Icon fontSize="large" name={wasCorrect ? 'plus' : 'minus'} />
-        </div>
-        <div className={classes.answerContainer}>
-          <div className={classes.questionText} dangerouslySetInnerHTML={{ __html: question }} />
-          <div className={classes.yourAnswers}>
-            <div className={classes.questionText} dangerouslySetInnerHTML={{ __html: `Your answer: ${givenAnswer}` }} />
-            {!wasCorrect && <div className={classes.questionText} dangerouslySetInnerHTML={{ __html: `Correct answer: ${correctAnswer}` }} />}
-          </div>
+    <PaperContainer className={`${classes.rootContainer}`}>
+      <div className={`${classes.iconContainer} ${wasCorrect ? classes.correctAnswer : classes.inCorrectAnswer}`}>
+        <Icon fontSize="large" name={wasCorrect ? 'plus' : 'minus'} />
+      </div>
+      <div className={classes.answerContainer}>
+        <div className={classes.questionText} dangerouslySetInnerHTML={{ __html: question }} />
+        <div className={classes.yourAnswers}>
+          <div dangerouslySetInnerHTML={{ __html: `Your answer: ${givenAnswer}` }} />
+          {!wasCorrect && <div dangerouslySetInnerHTML={{ __html: `Correct answer: ${correctAnswer}` }} />}
         </div>
       </div>
-    </Fragment>
+    </PaperContainer>
   );
 };
 

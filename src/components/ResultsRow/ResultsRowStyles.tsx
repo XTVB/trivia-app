@@ -6,11 +6,13 @@ const useStyles = makeStyles()((theme) => {
       display: 'flex',
       flexDirection: 'row',
       border: 'solid 1px black',
-      borderRadius: 10,
-      justifyContent: 'space-between',
-      // alignContent: 'space-between',
+      borderRadius: theme.spacing(2),
+      gap: theme.spacing(10),
+      [theme.breakpoints.down('sm')]: {
+        gap: theme.spacing(4),
+      },
       padding: theme.spacing(2),
-      // margin: theme.spacing(2, 4),
+      backgroundColor: theme.palette.primary.main,
     },
     correctAnswer: {
       backgroundColor: theme.palette.success.main,
@@ -19,23 +21,34 @@ const useStyles = makeStyles()((theme) => {
       backgroundColor: theme.palette.error.main,
     },
     iconContainer: {
-      fontSize: theme.typography.fontSize,
-      fontWeight: 400,
-      alignSelf: 'center',
       display: 'flex',
+      alignSelf: 'center',
       borderRadius: 20,
     },
     answerContainer: {
-      width: '70%',
       display: 'flex',
-      gap: 10,
-      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexDirection: 'row',
+      flex: 1,
     },
-    questionText: {},
+    questionText: {
+      width: '80%',
+      // can use whole width on smaller screens when yourAnswers isn't displayed
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+      },
+    },
     yourAnswers: {
       display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
+      // Hide your answers on smaller screens to save screen real-estate
+      [theme.breakpoints.down('sm')]: {
+        display: 'none',
+      },
+      flexDirection: 'column',
+      textAlign: 'right',
+      gap: theme.spacing(1),
+      fontSize: theme.typography.fontSizeSmall,
     },
   };
 });

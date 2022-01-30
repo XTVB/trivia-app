@@ -6,24 +6,26 @@ declare module '@mui/styles' {
   interface DefaultTheme extends Theme {}
 }
 
+declare module '@mui/material/styles/createTypography' {
+  interface Typography {
+    fontSizeSmall: number;
+    fontSizeLarge: number;
+  }
+  interface TypographyOptions {
+    fontSizeSmall: number;
+    fontSizeLarge: number;
+  }
+}
+
 const fontSize = 16;
-const fontSizeSmall = fontSize - 4;
-const fontSizeLarge = fontSize + 4;
 
 export const theme = responsiveFontSizes(
   createTheme({
     typography: {
-      htmlFontSize: fontSize,
       fontFamily: 'Roboto, sans-serif',
       fontSize: fontSize,
-      fontSizeSmall: fontSizeSmall,
-      fontSizeLarge: fontSizeLarge,
-    },
-    base: {
-      border: '1px solid #e0e6ed',
-      borderRadius: '4px',
-      borderThick: '1px',
-      transition: 'all 0.3s ease',
+      fontSizeSmall: fontSize - 4,
+      fontSizeLarge: fontSize + 4,
     },
     palette: {
       primary: {
@@ -44,16 +46,13 @@ export const theme = responsiveFontSizes(
         main: '#d32f2f',
       },
       text: {
-        primary: '#e5e9f2',
+        primary: '#f9fafc',
         secondary: '#999da7',
       },
       background: {
         default: '#eff2f7',
         paper: '#f9fafc',
       },
-    },
-    shape: {
-      borderRadius: 10,
     },
     spacing: 5,
     breakpoints: {
@@ -63,6 +62,15 @@ export const theme = responsiveFontSizes(
         md: 960,
         lg: 1280,
         xl: 1920,
+      },
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          body: {
+            lineHeight: 'normal',
+          },
+        },
       },
     },
   })

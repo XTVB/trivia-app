@@ -11,6 +11,7 @@ const useStyles = makeStyles()((theme) => {
       gap: theme.spacing(4),
     },
     paperContainer: {
+      width: '90%',
       display: 'flex',
       flexDirection: 'column',
       gap: theme.spacing(2),

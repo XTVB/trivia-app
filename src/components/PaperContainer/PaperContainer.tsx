@@ -9,7 +9,7 @@ export interface PaperContainerProps {
 const PaperContainer: FC<PaperContainerProps> = ({ className, children }) => {
   const { classes } = useStyles();
   return (
-    <Paper classes={classes} className={className} elevation={5}>
+    <Paper className={`${className} ${classes.paperContainer}`} elevation={5}>
       {children}
     </Paper>
   );

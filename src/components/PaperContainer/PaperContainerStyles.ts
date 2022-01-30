@@ -2,9 +2,9 @@ import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => {
   return {
-    root: {
+    paperContainer: {
       padding: theme.spacing(4),
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.spacing(2),
       backgroundColor: theme.palette.secondary.dark,
     },
   };

@@ -7,6 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './assets/styles/theme';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
+import { CssBaseline } from '@mui/material';
 
 export const muiCache = createCache({
   key: 'mui',
@@ -31,6 +32,7 @@ const App: FC = () => {
   return (
     <CacheProvider value={muiCache}>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <AlertModal open={showModal} closeHandle={() => setShowModal(false)} message={alertMessage} />
         <Routes />
       </ThemeProvider>
