@@ -9,6 +9,7 @@ const useStyles = makeStyles()((theme) => {
       alignItems: 'center',
       flexDirection: 'column',
       height: '100%',
+      gap: theme.spacing(4),
     },
   };
 });

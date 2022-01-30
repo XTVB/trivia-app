@@ -16,9 +16,9 @@ const TopMenu: FC = () => {
 
   return (
     <header className={classes.container}>
-      <Title title={pageTitle} isSubtitle={false} />
+      <Title title={pageTitle} />
       <div onClick={() => dispatch(push(PATH.PAST_RESULT))} className={classes.loginContainer}>
-        <Icon name={'login'} fontSize="large" />
+        <Icon name={'login'} />
       </div>
     </header>
   );

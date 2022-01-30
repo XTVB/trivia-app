@@ -6,7 +6,7 @@ const useStyles = makeStyles()((theme) => {
       display: 'flex',
       justifyContent: 'center',
       gap: theme.spacing(4),
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.down('sm')]: {
         gap: theme.spacing(2),
       },
       width: '100%',

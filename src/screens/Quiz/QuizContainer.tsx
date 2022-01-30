@@ -1,12 +1,9 @@
 import { push } from 'connected-react-router';
 import React, { FC, Fragment, useEffect, useMemo, useState } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import Button from 'src/components/Button';
-import FlipCard from 'src/components/FlipCard';
-import QuestionCard from 'src/components/QuestionCard';
+import { CSSTransition } from 'react-transition-group';
 import QuestionContainer from 'src/components/QuestionContainer';
 import { useAppDispatch, useTypedSelector } from 'src/redux/store';
-import { getCurrentQuizSetup, Question, Answer, saveResultsAndNavigateToPage, setTitle, QuestionType, QuizSetup } from 'src/redux/SystemState';
+import { getCurrentQuizSetup, Answer, saveResultsAndNavigateToPage, setTitle } from 'src/redux/SystemState';
 import { PATH } from 'src/utils/constants';
 import { isDefined } from 'src/utils/utils';
 
@@ -26,13 +23,44 @@ const QuizPage: FC = () => {
       // navigate back to home page if questions are empty, e.g. because /quiz was navigated to directly
       dispatch(push(PATH.HOME));
     }
-  }, [questions]);
+  }, [dispatch, questions]);
 
-  const answerCallback = (result: Answer) => {
-    const newResults = [...results, result];
-    setResults(newResults);
+  const questionContainers = useMemo(() => {
+    return questions.map((question, index) => {
+      return {
+        question,
+        element: (
+          <QuestionContainer
+            key={question.question}
+            question={question}
+            questionType={type}
+            questionNumber={`${index + 1}/${amount}`}
+            answerCallback={(result: Answer) => {
+              setResults((results) => [...results, result]);
+            }}
+          />
+        ),
+      };
+    });
+  }, [questions, type, amount]);
+
+  const currentFrontQuestion = useMemo(() => {
+    return questionNumber <= questionContainers.length ? questionContainers[questionNumber - 1] : undefined;
+  }, [questionNumber, questionContainers]);
+
+  const currentBackQuestion = useMemo(() => {
+    return questionNumber + 1 <= questionContainers.length ? questionContainers[questionNumber] : undefined;
+  }, [questionNumber, questionContainers]);
+
+  useEffect(() => {
+    isDefined(currentFrontQuestion) && dispatch(setTitle(currentFrontQuestion.question.category));
+  }, [dispatch, currentFrontQuestion]);
+
+  useEffect(() => {
+    if (results.length !== questionNumber) {
+      return;
+    }
     if (questionNumber < amount) {
-      // setQuestionNumber(questionNumber + 1);
       setIsFlipped(true);
     } else {
       dispatch(
@@ -41,36 +69,14 @@ const QuizPage: FC = () => {
           amount,
           difficulty,
           category,
-          results: newResults,
+          results,
         })
       );
     }
-  };
-
-  const questionContainers = useMemo(() => {
-    return questions.map((question, index) => {
-      return (
-        <QuestionContainer
-          key={question.question}
-          question={question}
-          questionType={type}
-          questionNumber={`${index + 1}/${amount}`}
-          answerCallback={answerCallback}
-        />
-      );
-    });
-  }, [questions, questionNumber, amount]);
-
-  const currentFrontQuestion = useMemo(() => {
-    return questionNumber <= questionContainers.length ? questionContainers[questionNumber - 1] : undefined;
-  }, [questionContainers]);
-
-  const currentBackQuestion = useMemo(() => {
-    return questionNumber + 1 <= questionContainers.length ? questionContainers[questionNumber] : undefined;
-  }, [questionContainers]);
+  }, [questionNumber, results, dispatch, type, amount, difficulty, category]);
 
   return (
-    <section className={classes.root}>
+    <Fragment>
       <CSSTransition
         onEntered={() => {
           setQuestionNumber(questionNumber + 1);
@@ -83,15 +89,15 @@ const QuizPage: FC = () => {
         }}
       >
         <div className={classes.flipCard}>
-          <div key={currentFrontQuestion?.key} className={classes.cardSide}>
-            {currentFrontQuestion}
+          <div key={currentFrontQuestion?.element.key} className={classes.cardSide}>
+            {currentFrontQuestion?.element}
           </div>
-          <div key={currentBackQuestion?.key} className={`${classes.cardSide} ${classes.backSide}`}>
-            {currentBackQuestion}
+          <div key={currentBackQuestion?.element.key} className={`${classes.cardSide} ${classes.backSide}`}>
+            {currentBackQuestion?.element}
           </div>
         </div>
       </CSSTransition>
-    </section>
+    </Fragment>
   );
 };
 

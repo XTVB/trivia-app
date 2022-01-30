@@ -1,7 +1,5 @@
 import React, { FC, Fragment } from 'react';
-import { Answer, Question } from 'src/redux/SystemState';
-import { isDefined } from 'src/utils/utils';
-import Button from '../Button';
+import { Answer } from 'src/redux/SystemState';
 import Icon from '../Icons';
 import useStyles from './ResultsRowStyles';
 
@@ -14,9 +12,9 @@ const ResultsRow: FC<ResultsRowProps> = ({ result: { question, wasCorrect, given
 
   return (
     <Fragment>
-      <div className={`${classes.rootContainer} ${wasCorrect ? classes.correctAnswer : classes.inCorrectAnswer}`}>
-        <div className={classes.iconContainer}>
-          <Icon name={wasCorrect ? 'plus' : 'minus'} />
+      <div className={`${classes.rootContainer}`}>
+        <div className={`${classes.iconContainer} ${wasCorrect ? classes.correctAnswer : classes.inCorrectAnswer}`}>
+          <Icon fontSize="large" name={wasCorrect ? 'plus' : 'minus'} />
         </div>
         <div className={classes.answerContainer}>
           <div className={classes.questionText} dangerouslySetInnerHTML={{ __html: question }} />

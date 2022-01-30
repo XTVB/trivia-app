@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Answer } from 'src/redux/SystemState';
 
 export function isDefined<T>(val: T | undefined | null): val is T {
@@ -21,12 +22,23 @@ export function getScore(results: Answer[]): string {
   return `${correctAnswers}/${totalQuestions}`;
 }
 
-export const paginateArray = <T>(array: T[], size: number): T[][] => {
-  return array.reduce((acc, val, i) => {
-    let idx = Math.floor(i / size)
-    let page = acc[idx] || (acc[idx] = [])
-    page.push(val)
+export const useInterval = (callback: () => void, delay: number | null): void => {
+  const savedCallback = useRef(callback);
 
-    return acc
-  }, [] as T[][])
-}
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      const id = setInterval(tick, delay);
+      // clear on unMount
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};

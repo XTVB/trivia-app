@@ -24,7 +24,7 @@ const ConfigPage: FC = () => {
 
   useEffect(() => {
     dispatch(setTitle('Configure Trivia Challenge'));
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className={classes.container}>

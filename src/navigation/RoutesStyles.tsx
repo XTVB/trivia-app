@@ -26,7 +26,7 @@ const useStyles = makeStyles()((theme) => {
       width: '100%',
       padding: theme.spacing(10),
       overflowY: 'scroll',
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.down('sm')]: {
         padding: theme.spacing(5),
       },
     },

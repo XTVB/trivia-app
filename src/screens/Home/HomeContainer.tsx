@@ -24,7 +24,7 @@ const HomePage: FC = () => {
 
   useEffect(() => {
     dispatch(setTitle('Welcome to the Trivia Challenge'));
-  }, []);
+  }, [dispatch]);
 
   return (
     <main className={classes.container}>

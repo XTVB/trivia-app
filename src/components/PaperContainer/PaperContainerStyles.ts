@@ -3,8 +3,7 @@ import { makeStyles } from 'tss-react/mui';
 const useStyles = makeStyles()((theme) => {
   return {
     root: {
-      padding: theme.spacing(5, 4),
-      margin: theme.spacing(5, 0),
+      padding: theme.spacing(4),
       borderRadius: theme.shape.borderRadius,
       backgroundColor: theme.palette.secondary.dark,
     },

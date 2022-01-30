@@ -4,7 +4,7 @@ import useStyles from './ButtonStyles';
 import Icon, { IconNames } from 'src/components/Icons';
 import { isDefined } from 'src/utils';
 
-export type ButtonProps = {
+type ButtonProps = {
   startIcon?: IconNames;
   endIcon?: IconNames;
   clickHandler?: (...arg: any) => void;

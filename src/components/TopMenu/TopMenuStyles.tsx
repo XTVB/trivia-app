@@ -10,13 +10,12 @@ const useStyles = makeStyles()((theme) => {
       flexDirection: 'row',
       color: theme.palette.text.primary,
       backgroundColor: theme.palette.primary.dark,
-      // borderBottom: `1px solid ${theme.palette.primary.main}`,
-      boxShadow: `0 0 3px 2px rgba(${theme.palette.primary.main}, 0.8)`,
-      padding: theme.spacing(2, 4),
-      [theme.breakpoints.up('sm')]: {
-        padding: theme.spacing(2, 6),
+      boxShadow: `0 0 3px 2px ${theme.palette.primary.main}`,
+      padding: theme.spacing(2, 6),
+      [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(2, 2),
       },
-      ['&>*:first-child']: {
+      '&>h1': {
         marginRight: 'auto',
         marginLeft: 'auto',
       },
@@ -26,6 +25,11 @@ const useStyles = makeStyles()((theme) => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      // TODO
+      fontSize: 36,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 24,
+      },
     },
   };
 });
