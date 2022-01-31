@@ -13,7 +13,7 @@ const QuizPage: FC = () => {
   const { classes } = useStyles();
   const dispatch = useAppDispatch();
 
-  const { questions, type, amount, difficulty, category } = useTypedSelector(getCurrentQuizSetup);
+  const { questions, type, questionAmount: amount, difficulty, categoryId: category } = useTypedSelector(getCurrentQuizSetup);
   const [isFlipped, setIsFlipped] = useState(false);
   const [questionNumber, setQuestionNumber] = useState<number>(1);
   const [results, setResults] = useState<Answer[]>([]);
@@ -65,9 +65,9 @@ const QuizPage: FC = () => {
       dispatch(
         saveResultsAndNavigateToPage({
           type,
-          amount,
+          questionAmount: amount,
           difficulty,
-          category,
+          categoryId: category,
           results,
         })
       );

@@ -1,13 +1,14 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { setAlertMessage, getAlertMessage, initiatePastResults } from 'src/redux/SystemState';
+import { setAlertMessage, getAlertMessage } from 'src/redux/SystemState';
 import { useAppDispatch, useTypedSelector } from 'src/redux/store';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import { theme } from './assets/styles/theme';
+import { theme } from 'src/assets/styles/theme';
 import Routes from 'src/navigation';
 import AlertModal from 'src/components/AlertModal';
+import { validateEnvVars } from 'src/utils';
 
 export const muiCache = createCache({
   key: 'mui',
@@ -18,16 +19,24 @@ const App: FC = () => {
   const dispatch = useAppDispatch();
   const alertMessage = useTypedSelector(getAlertMessage);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [envConfiguredCorrectly, setEnvConfiguredCorrectly] = useState<boolean>(false);
 
-  // TODO
   useEffect(() => {
-    dispatch(initiatePastResults());
+    if (validateEnvVars()) {
+      setEnvConfiguredCorrectly(true);
+    } else {
+      dispatch(setAlertMessage('Application incorrectly configured. Please contact the administrator'));
+    }
   }, [dispatch]);
 
   const handleAlertClose = useCallback(() => {
+    if (!envConfiguredCorrectly) {
+      return;
+    }
+
     dispatch(setAlertMessage(''));
     setShowModal(false);
-  }, [dispatch]);
+  }, [envConfiguredCorrectly, dispatch]);
 
   useEffect(() => {
     if (alertMessage.trim()) {
@@ -40,7 +49,7 @@ const App: FC = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AlertModal open={showModal} closeHandle={handleAlertClose} message={alertMessage} />
-        <Routes />
+        {envConfiguredCorrectly && <Routes />}
       </ThemeProvider>
     </CacheProvider>
   );

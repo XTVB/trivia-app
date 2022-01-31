@@ -23,9 +23,9 @@ export type Category = {
 export type QuestionType = 'boolean' | 'multiple';
 
 export type BaseQuizSetup = {
-  amount: number;
+  questionAmount: number;
   difficulty: Difficulty;
-  category?: Category;
+  categoryId: number;
   type: QuestionType;
 };
 export type QuizSetup = {
@@ -44,6 +44,7 @@ export interface SystemState {
   currentQuizSetup: QuizSetup;
   currentResults: Answer[];
   pastResults: PastResult[];
+  categoryList: Category[];
 }
 
 export type BeginQuizPayload = BaseQuizSetup;
@@ -51,3 +52,8 @@ export type BeginQuizPayload = BaseQuizSetup;
 export type StoreResultsPayload = {
   results: Answer[];
 } & BaseQuizSetup;
+
+export type FetchQuestionsResponse = {
+  response_code: 0 | 1 | 2 | 3 | 4;
+  results: Question[];
+};

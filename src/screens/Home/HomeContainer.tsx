@@ -15,9 +15,10 @@ const HomePage: FC = () => {
   const launchDefaultQuiz = () => {
     dispatch(
       beginQuiz({
-        amount: 10,
+        questionAmount: 10,
         type: 'boolean',
         difficulty: 'hard',
+        categoryId: -1,
       })
     );
   };

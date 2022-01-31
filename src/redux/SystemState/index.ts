@@ -9,8 +9,9 @@ export * from './selectors';
 export * from './models';
 
 export const { name, reducer: systemStateReducer, actions } = systemSlice;
-export const { setTitle, setAlertMessage, setCurrentQuizSetup, setCurrentResults, setPastResults } = actions;
+export const { setTitle, setAlertMessage, setCurrentQuizSetup, setCurrentResults, setPastResults, setCategoryList } = actions;
 
 export const beginQuiz = createAction<BeginQuizPayload>('beginQuiz');
 export const saveResultsAndNavigateToPage = createAction<StoreResultsPayload>('saveResultsAndNavigateToPage');
 export const initiatePastResults = createAction('initiatePastResults');
+export const fetchCategoryList = createAction('fetchCategoryList');

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Route, useLocation } from 'react-router-dom';
 import { PATH } from 'src/utils/constants';
 import TopMenu from 'src/components/TopMenu';
@@ -10,10 +10,20 @@ import PastResultsPage from 'src/screens/PastResults';
 import useStyles from './RoutesStyles';
 import LoadingBar from 'react-redux-loading-bar';
 import SlideRoutes from './SlideRoutes';
+import { useAppDispatch } from 'src/redux/store';
+import { fetchCategoryList, initiatePastResults } from 'src/redux/SystemState';
 
 const Routes: FC = () => {
   const { classes } = useStyles();
   const location = useLocation();
+  const dispatch = useAppDispatch();
+
+  // TODO
+  // Initialisation
+  useEffect(() => {
+    dispatch(initiatePastResults());
+    dispatch(fetchCategoryList());
+  }, [dispatch]);
 
   return (
     <div className={classes.layout}>
