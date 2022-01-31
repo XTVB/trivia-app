@@ -5,7 +5,6 @@ const useStyles = makeStyles()((theme) => {
     rootContainer: {
       display: 'flex',
       flexDirection: 'row',
-      border: 'solid 1px black',
       borderRadius: theme.spacing(2),
       gap: theme.spacing(10),
       [theme.breakpoints.down('sm')]: {

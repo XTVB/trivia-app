@@ -1,7 +1,6 @@
 import { createSelectorHook, useDispatch } from 'react-redux';
 import { all, fork } from 'typed-redux-saga';
 import { systemStateReducer, systemStateSaga } from './SystemState';
-
 import { configureStore } from '@reduxjs/toolkit';
 import { History, createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';

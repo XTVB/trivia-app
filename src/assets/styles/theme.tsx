@@ -50,7 +50,7 @@ export const theme = responsiveFontSizes(
         secondary: '#999da7',
       },
       background: {
-        default: '#eff2f7',
+        default: '#316cb5',
         paper: '#f9fafc',
       },
     },

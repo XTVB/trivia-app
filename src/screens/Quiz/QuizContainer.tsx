@@ -22,6 +22,8 @@ const QuizPage: FC = () => {
     if (questions.length < 1) {
       // navigate back to home page if questions are empty, e.g. because /quiz was navigated to directly
       dispatch(push(PATH.HOME));
+    } else {
+      dispatch(setTitle(questions[0].category));
     }
   }, [dispatch, questions]);
 
@@ -53,15 +55,12 @@ const QuizPage: FC = () => {
   }, [questionNumber, questionContainers]);
 
   useEffect(() => {
-    isDefined(currentFrontQuestion) && dispatch(setTitle(currentFrontQuestion.question.category));
-  }, [dispatch, currentFrontQuestion]);
-
-  useEffect(() => {
     if (results.length !== questionNumber) {
       return;
     }
     if (questionNumber < amount) {
       setIsFlipped(true);
+      isDefined(currentBackQuestion) && dispatch(setTitle(currentBackQuestion.question.category));
     } else {
       dispatch(
         saveResultsAndNavigateToPage({
@@ -73,7 +72,7 @@ const QuizPage: FC = () => {
         })
       );
     }
-  }, [questionNumber, results, dispatch, type, amount, difficulty, category]);
+  }, [questionNumber, results, currentBackQuestion, dispatch, type, amount, difficulty, category]);
 
   return (
     <Fragment>
