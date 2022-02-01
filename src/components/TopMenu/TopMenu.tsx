@@ -18,7 +18,7 @@ const TopMenu: FC = () => {
     <header className={classes.container}>
       <Title testId="pageTitle" title={pageTitle} />
       <div onClick={() => dispatch(push(PATH.PAST_RESULT))} className={classes.loginContainer}>
-        <Icon name={'login'} />
+        <Icon name={'history'} />
       </div>
     </header>
   );

@@ -9,6 +9,7 @@ const useStyles = makeStyles()((theme) => {
       alignItems: 'center',
       flexDirection: 'column',
       gap: theme.spacing(4),
+      marginBottom: theme.spacing(4),
     },
     paperContainer: {
       width: '90%',

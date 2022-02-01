@@ -92,7 +92,6 @@ function* trySaveResults({ payload }: ReturnType<typeof saveResultsAndNavigateTo
 function* tryInitiatePastResults() {
   try {
     yield* put(showLoading());
-    // TODO integrate them with current results in order of date
     const pastResultString = localStorage.getItem('userResults');
     yield* put(setPastResults(isDefined(pastResultString) ? JSON.parse(pastResultString) : []));
   } catch (error) {

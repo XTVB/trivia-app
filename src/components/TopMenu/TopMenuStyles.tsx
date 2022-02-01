@@ -25,7 +25,7 @@ const useStyles = makeStyles()((theme) => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      // TODO
+      cursor: 'pointer',
       fontSize: 36,
       [theme.breakpoints.down('sm')]: {
         fontSize: 24,

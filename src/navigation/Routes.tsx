@@ -18,7 +18,6 @@ const Routes: FC = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-  // TODO
   // Initialisation
   useEffect(() => {
     dispatch(initiatePastResults());
