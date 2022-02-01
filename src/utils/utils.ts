@@ -32,9 +32,9 @@ export const useInterval = (callback: () => void, delay: number | null): void =>
 
   // Set up the interval.
   useEffect(() => {
-    function tick() {
+    const tick = () => {
       savedCallback.current();
-    }
+    };
     if (delay !== null) {
       const id = setInterval(tick, delay);
       // clear on unMount

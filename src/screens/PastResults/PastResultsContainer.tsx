@@ -13,7 +13,7 @@ const PastResultsPage: FC = () => {
   const dispatch = useAppDispatch();
 
   const pastResults = useTypedSelector(getPastResults);
-  console.log(pastResults);
+
   return (
     <section className={classes.root}>
       <PaperContainer>

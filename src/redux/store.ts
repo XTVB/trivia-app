@@ -8,13 +8,13 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { combineReducers } from 'redux';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 
-function* rootSaga() {
+export function* rootSaga() {
   yield* all([fork(systemStateSaga)]);
 }
 
-const sagaMiddleware = createSagaMiddleware();
+export const sagaMiddleware = createSagaMiddleware();
 
-const rootReducer = (history: History) =>
+export const rootReducer = (history: History) =>
   combineReducers({
     router: connectRouter(history),
     loadingBar: loadingBarReducer,

@@ -28,7 +28,7 @@ const HomePage: FC = () => {
   }, [dispatch]);
 
   return (
-    <main className={classes.container}>
+    <main data-testid="homeContainer" className={classes.container}>
       <PaperContainer className={classes.textContainer}>
         <p>You will be presented with 10 True or False questions.</p>
         <p>Can you score 100%?</p>

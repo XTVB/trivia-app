@@ -12,7 +12,7 @@ const ResultsRow: FC<ResultsRowProps> = ({ result: { question, wasCorrect, given
   const { classes } = useStyles();
 
   return (
-    <PaperContainer className={`${classes.rootContainer}`}>
+    <PaperContainer testId="resultRow" className={`${classes.rootContainer}`}>
       <div className={`${classes.iconContainer} ${wasCorrect ? classes.correctAnswer : classes.inCorrectAnswer}`}>
         <Icon fontSize="large" name={wasCorrect ? 'plus' : 'minus'} />
       </div>

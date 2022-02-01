@@ -13,7 +13,7 @@ const QuizPage: FC = () => {
   const { classes } = useStyles();
   const dispatch = useAppDispatch();
 
-  const { questions, type, questionAmount: amount, difficulty, categoryId: category } = useTypedSelector(getCurrentQuizSetup);
+  const { questions, type, questionAmount, difficulty, categoryId: category } = useTypedSelector(getCurrentQuizSetup);
   const [isFlipped, setIsFlipped] = useState(false);
   const [questionNumber, setQuestionNumber] = useState<number>(1);
   const [results, setResults] = useState<Answer[]>([]);
@@ -36,7 +36,7 @@ const QuizPage: FC = () => {
             key={question.question}
             question={question}
             questionType={type}
-            questionNumber={`${index + 1}/${amount}`}
+            questionNumber={`${index + 1}/${questionAmount}`}
             answerCallback={(result: Answer) => {
               setResults((results) => [...results, result]);
             }}
@@ -44,7 +44,7 @@ const QuizPage: FC = () => {
         ),
       };
     });
-  }, [questions, type, amount]);
+  }, [questions, type, questionAmount]);
 
   const currentFrontQuestion = useMemo(() => {
     return questionNumber <= questionContainers.length ? questionContainers[questionNumber - 1] : undefined;
@@ -58,21 +58,21 @@ const QuizPage: FC = () => {
     if (results.length !== questionNumber) {
       return;
     }
-    if (questionNumber < amount) {
+    if (questionNumber < questionAmount) {
       setIsFlipped(true);
       isDefined(currentBackQuestion) && dispatch(setTitle(currentBackQuestion.question.category));
     } else {
       dispatch(
         saveResultsAndNavigateToPage({
           type,
-          questionAmount: amount,
+          questionAmount,
           difficulty,
           categoryId: category,
           results,
         })
       );
     }
-  }, [questionNumber, results, currentBackQuestion, dispatch, type, amount, difficulty, category]);
+  }, [questionNumber, results, currentBackQuestion, dispatch, type, questionAmount, difficulty, category]);
 
   return (
     <Fragment>
@@ -87,8 +87,8 @@ const QuizPage: FC = () => {
           enterActive: classes.flipCardActive,
         }}
       >
-        <div className={classes.flipCard}>
-          <div key={currentFrontQuestion?.element.key} className={classes.cardSide}>
+        <div data-testid="quizContainer" className={classes.flipCard}>
+          <div data-testid="frontOfCard" key={currentFrontQuestion?.element.key} className={classes.cardSide}>
             {currentFrontQuestion?.element}
           </div>
           <div key={currentBackQuestion?.element.key} className={`${classes.cardSide} ${classes.backSide}`}>

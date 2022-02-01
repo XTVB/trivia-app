@@ -1,4 +1,4 @@
-// Adapted from https://www.npmjs.com/package/react-slide-routes
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 import { useMemo, useRef, cloneElement, createElement, Children, FC } from 'react';
@@ -127,3 +127,4 @@ const SlideRoutes: FC<SlideRoutesProps> = ({ location, duration = 200, timing = 
 };
 
 export default SlideRoutes;
+// Adapted from https://www.npmjs.com/package/react-slide-routes

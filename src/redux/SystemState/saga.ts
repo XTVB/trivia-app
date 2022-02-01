@@ -39,11 +39,11 @@ function* tryFetchQuestions({ payload }: ReturnType<typeof beginQuiz>) {
   try {
     yield* put(showLoading());
     const { response_code: code, results: questions } = yield* call(triviaApi.getQuestions, payload);
-
     if (code === 0) {
       yield* put(
         setCurrentQuizSetup({
           ...payload,
+          questionAmount: questions.length,
           questions,
         })
       );

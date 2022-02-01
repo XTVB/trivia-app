@@ -40,7 +40,7 @@ const ResultsPage: FC = () => {
   }, delay);
 
   return (
-    <section className={classes.resultsContainer}>
+    <section data-testid="resultsContainer" className={classes.resultsContainer}>
       <PaperContainer className={classes.paperContainer}>
         <TransitionGroup component={null}>
           {staggeredResults.map((result) => (
